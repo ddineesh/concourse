@@ -1,15 +1,15 @@
 ---
 resources:
-  - name: resource-tutorial
+  - name: dinesh-concourse-git
     type: git
     source:
-      uri: https://github.com/starkandwayne/concourse-tutorial.git
-      branch: develop
+      uri: https://github.com/ddineesh/concourse.git
+      branch: main
 
 jobs:
   - name: job-hello-world
     public: true
     plan:
-      - get: resource-tutorial
+      - get: dinesh-concourse-git
       - task: hello-world
-        file: resource-tutorial/tutorials/basic/task-hello-world/task_hello_world.yml
+        file: dinesh-concourse-git/jobs/basic/task-hello-world/task_hello_world.yml
