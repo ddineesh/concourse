@@ -1,0 +1,20 @@
+--Configure access to your local Concourse CI with the name dinesh-ci, using username admin and password admin
+fly --target dinesh-ci login --concourse-url http://127.0.0.1:8080 -u admin -p admin
+
+--register the new pipeline:
+
+fly -t dinesh-ci set-pipeline -p hello-world -c hello.yml
+
+--after the above executed successfully, we will the below output
+
+pipeline created!
+you can view your pipeline here: http://127.0.0.1:8080/teams/main/pipelines/hello-world
+
+Our hello-world job does not have any input triggers, so we must manually start it.
+
+Click the "hello-world" job to view it, 
+and click its Plus (+) button on the top right to manually trigger the job to start. 
+
+
+--the pipeline is currently paused. to unpause, either: run the unpause-pipeline command:
+fly -t dinesh-ci unpause-pipeline -p hello-world
