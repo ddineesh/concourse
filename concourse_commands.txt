@@ -1,3 +1,5 @@
+--to bring up the concourse using the docker-compose, run the below command where the docker-compose.yml is located
+docker-compose up 
 --Configure access to your local Concourse CI with the name dinesh-ci, using username admin and password admin
 fly --target dinesh-ci login --concourse-url http://127.0.0.1:8080 -u admin -p admin
 
@@ -18,3 +20,27 @@ and click its Plus (+) button on the top right to manually trigger the job to st
 
 --the pipeline is currently paused. to unpause, either: run the unpause-pipeline command:
 fly -t dinesh-ci unpause-pipeline -p hello-world
+
+--The below pipeline.yml will pull the source from git and run the job
+
+fly -t dinesh-ci set-pipeline -p hello-world -c C:\Dinesh\Software\concourse\jobs\basic\pipeline-resources\pipeline.yml
+
+--To watch the steps from the terminal
+
+fly -t dinesh-ci watch -j hello-world/job-hello-world
+
+--You can see the results of recent builds across all pipelines with fly builds
+
+fly -t dinesh-ci builds
+
+--We can re-trigger our hello-world pipeline's job-hello-world
+
+fly -t dinesh-ci trigger-job -j hello-world/job-hello-world
+
+-- The command can be added -w to the end to watch the logs in the terminal
+
+fly -t dinesh-ci trigger-job -j hello-world/job-hello-world -w
+
+--You can delete the hello-world pipeline
+
+fly -t dinesh-ci destroy-pipeline -p hello-world
